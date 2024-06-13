@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Peta Wisata Sleman</title>
+    <title>SmartMaps Trans Jogja</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="storage/css/main.css" />
@@ -11,6 +11,22 @@
         <link rel="stylesheet" href="storage/css/noscript.css" />
     </noscript>
 </head>
+<!-- Menambahkan Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .icons {
+            list-style: none;
+            padding: 0;
+        }
+        .icons li {
+            display: inline;
+            margin: 0 10px;
+        }
+        .icons a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
 
 <body class="homepage is-preload">
     <div id="page-wrapper">
@@ -21,9 +37,9 @@
             <!-- Inner -->
             <div class="inner">
                 <header>
-                    <h1><a href="#kab" id="logo">Wisata Kabupaten Sleman</a></h1>
+                    <h1><a href="#kab" id="logo">SmartMaps Trans Jogja</a></h1>
                     <hr />
-                    <p>Seberapa kenalkah anda dengan wisata yang ada di Kabupaten Sleman ??</p>
+                    <p>Mulai mencari Rute ??</p>
                 </header>
                 <footer>
                     <a href="{{ route('index-public') }}" class="button circled scrolly">Ayo!!!</a>
@@ -33,106 +49,11 @@
             <!-- Nav -->
             <nav id="nav">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li>
-                        <a href="#">Dropdown</a>
-                        <ul>
-                            <li><a href="#kab">Kabupaten Sleman</a></li>
-                            <li><a href="#galeri">Galeri Wisata</a></li>
-                            <li><a href="#peta">Peta Wisata</a></li>
-
-                        </ul>
                     </li>
-                    <li><a href="profil.html">Profile</a></li>
-                    <li><a href="tabel.php">Data</a></li>
+                    <li><a href="index_public.blade.php">Profile</a></li>
+                    <li><a href="tabel-point.blade.php">Data</a></li>
                 </ul>
             </nav>
-
-        </div>
-
-        <!-- Features -->
-        <div id="kab" class="wrapper style1">
-
-            <section id="features" class="container special">
-                <header>
-                    <h2>Kabupaten Sleman</h2>
-                    <p>Sebelumnya, mari berkenalan dengan Kabupaten Sleman dan Wisata yang ada</p>
-                </header>
-                <div class="row">
-                    <article class="col-4 col-12-mobile special">
-                        <a href="#galeri" class="image featured"><img src="images/sleman.png" alt=""
-                                style="width: 320px; height: 250px;" /></a>
-                        <header>
-                            <h3><a href="#">Kabupaten Sleman</a></h3>
-                        </header>
-                        <p>
-                            Kabupaten Sleman, terletak di Provinsi Daerah Istimewa Yogyakarta, adalah destinasi wisata
-                            yang menggabungkan keindahan alam, warisan budaya, dan pengalaman lokal yang unik. Dikenal
-                            sebagai rumah bagi Candi Prambanan, situs warisan dunia yang memukau, Sleman menawarkan
-                            perpaduan pesona sejarah dan keelokan alam. Kawasan pegunungan seperti Kaliurang menyuguhkan
-                            udara segar dan panorama Gunung Merapi yang memukau. Wisatawan juga dapat menikmati kegiatan
-                            rekreasi modern di Taman Pelangi dan menjelajahi kekayaan seni dan kerajinan melalui galeri
-                            serta pusat kreativitas. Dengan harmoni antara keindahan alam, warisan budaya, dan keramahan
-                            penduduknya, Sleman menjadi destinasi yang memikat bagi mereka yang mencari pengalaman
-                            wisata yang mendalam dan beragam.
-                        </p>
-                    </article>
-                    <article class="col-4 col-12-mobile special">
-                        <a href="#galeri" class="image featured"><img src="images/boko.jpg" alt="" /></a>
-                        <header>
-                            <h3><a href="#galeri">Wisata Budaya</a></h3>
-                        </header>
-                        <p>
-                            Sleman menghadirkan pengalaman wisata budaya yang mendalam dan memikat. Kabupaten ini
-                            memancarkan pesona sejarah melalui Candi Prambanan, yang tidak hanya menjadi monumen
-                            arsitektur Hindu yang megah, tetapi juga merangkum kekayaan kisah dan kepercayaan spiritual.
-                            Wisatawan dapat merasakan kehangatan dan keramahan masyarakat setempat melalui berbagai
-                            upacara adat dan tradisi yang diwariskan dari generasi ke generasi. Selain itu, Sleman juga
-                            memamerkan seni rupa dan kreativitas melalui galeri seni, pertunjukan budaya, dan kerajinan
-                            tangan yang merefleksikan keindahan warisan lokal. Melalui perpaduan unik antara kearifan
-                            lokal dan kesenangan modern, Sleman menawarkan pengalaman wisata budaya yang tak terlupakan,
-                            mengundang pengunjung untuk meresapi keindahan dan keanekaragaman budaya Indonesia.
-                        </p>
-                    </article>
-                    <article class="col-4 col-12-mobile special">
-                        <a href="#galeri" class="image featured"><img src="images/Merapi.jpg" alt="" /></a>
-                        <header>
-                            <h3><a href="#galeri">Wisata Alam</a></h3>
-                        </header>
-                        <p>
-                            Sleman menawarkan keindahan alam yang memukau. Salah satu daya tarik utamanya adalah
-                            Kaliurang, sebuah kawasan pegunungan yang menyuguhkan udara segar, hamparan kebun stroberi,
-                            dan pemandangan spektakuler dari ketinggian terhadap Gunung Merapi. Kabupaten ini juga
-                            dikenal sebagai rumah bagi Candi Prambanan, yang tak hanya menjadi warisan budaya tetapi
-                            juga terletak di lingkungan yang hijau dan asri. Selain itu, Sleman memiliki Taman Pelangi
-                            yang menakjubkan dengan ribuan lampu warna-warni yang menciptakan suasana magis di malam
-                            hari. Dengan keberagaman lanskap mulai dari pegunungan hingga area pertanian yang subur,
-                            Sleman adalah tempat di mana keindahan alam dan ketenangan bersatu, menciptakan pengalaman
-                            wisata alam yang tak terlupakan.
-                        </p>
-                    </article>
-                </div>
-            </section>
-        </div>
-        
-        <!-- Main -->
-        <div id="peta" class="wrapper style2">
-
-            <article id="main" class="container special">
-                <a href="latihan.html" class="image featured"><img src="images/admin.png" alt="" width="300" height="600" /></a>
-                <header>
-                    <h2><a href="latihan.html">Peta Wisata Sleman</a></h2>
-                    <p>
-                        Peta ini menyediakan lokasi tempat wisata yang berada di Kabupaten Sleman beserta dengan rute wisata yang akan dituju.
-                    </p>
-                </header>
-                <p>
-
-                </p>
-                <footer>
-                    <a href="{{ route('index-public') }}" class="button">Peta Lokasi Wisata</a>
-                </footer>
-            </article>
 
         </div>
 
@@ -142,8 +63,8 @@
             <div class="container">
                 <!-- <div class="row"> -->
 
-                <!-- Contact -->
-                <section class="contact">
+                 <!-- Contact -->
+                 <section class="contact">
                     <header>
                         <h3>Informasi Kontak</h3>
                     </header>
@@ -157,6 +78,7 @@
                         <li><a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
                     </ul>
                 </section>
+
 
                 <!-- Copyright -->
                 <div class="copyright">

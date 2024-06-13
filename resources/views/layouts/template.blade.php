@@ -35,9 +35,8 @@
                             Table
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href=" {{ route('table-point') }}">Point</a></li>
-                            <li><a class="dropdown-item" href=" {{ route('table-polyline') }}">Polyline</a></li>
-                            <li><a class="dropdown-item" href=" {{ route('table-polygon') }}">Polygon</a></li>
+                            <li><a class="dropdown-item" href=" {{ route('table-point') }}">Halte Trans Jogja</a></li>
+                            <li><a class="dropdown-item" href=" {{ route('table-polyline') }}">Rute Trans Jogja</a></li>
                         </ul>
               <li class="nav-item">
                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#infoModal"><i class="fa-solid fa-circle-info"></i>Info</a>

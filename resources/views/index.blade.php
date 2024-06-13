@@ -104,49 +104,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal Create Polygon -->
-    <div class="modal fade" id="PolygonModal" tabindex="-1" aria-labelledby="PolygonModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="PolygonModalLabel">Create Polygon</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                     <form action="{{ route('polygon-store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf 
-                        <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Fill point name">
-                    </div>
-                        <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="geom" class="form-label">Geomerty</label>
-                            <textarea class="form-control" id="geom_polygon" name="geom" rows="1" readonly></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="image" class="form-label">Image</label>
-                            <input type="file" class="form-control" id="image_polygon" name="image"
-                            onchange="document.getElementById('preview-image-polygon').src = window.URL.createObjectURL(this.files[0])">
-                        </div>
-                        <div class="mb-3">
-                            <img src="" alt="preview" id="preview-image-polygon"
-                            class="img-thumbnail" width="400">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
-
 
 
 @section('script')
@@ -198,30 +156,6 @@
 
         L.control.layers(baseMaps).addTo(map);
 
-        /* Scale Bar */
-        L.control
-            .scale({
-                maxWidth: 150,
-                position: "bottomright",
-            })
-            .addTo(map);
-        // Image Watermark
-        L.Control.Watermark = L.Control.extend({
-            onAdd: function(map) {
-                var img2 = L.DomUtil.create("img");
-                img2.src = "storage/images/LOGO_SIG_BLUE.png";
-                img2.style.width = "150px";
-                return img2;
-            },
-        });
-        L.control.watermark = function(opts) {
-            return new L.Control.Watermark(opts);
-        };
-        L.control.watermark({
-            position: "bottomright"
-        }).addTo(map);
-
-
         /* Digitize Function */
         var drawnItems = new L.FeatureGroup();
         map.addLayer(drawnItems);
@@ -271,8 +205,20 @@
 
             drawnItems.addLayer(layer);
         });
-        		  /* GeoJSON Point */
-        var point = L.geoJson(null, {
+
+        // Define custom icon
+        var customIcon = L.icon({
+            iconUrl: "{{ asset('bus-removebg-preview.png') }}", // Pastikan ini adalah path yang benar ke gambar ikon Anda
+            iconSize: [32, 32], // Ukuran ikon, sesuaikan dengan ukuran gambar Anda
+            iconAnchor: [16, 32], // Titik anchor dari ikon (biasanya tengah bawah)
+            popupAnchor: [0, -32] // Titik anchor popup relatif terhadap ikon
+        });
+
+        //* GeoJSON Point */
+                  var point = L.geoJson(null, {
+            pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, {icon: customIcon});
+            },
             onEachFeature: function(feature, layer) {
                 var popupContent = "Name: " + feature.properties.name + "<br>" +
                     "Description: " + feature.properties.description + "<br>" +
@@ -307,54 +253,51 @@
         });
 
 
-// Fungsi untuk mendapatkan gaya untuk polyline
-function getStyle(feature) {
-    return {
-        color: getColor(feature.properties.PopupInfo), // Menggunakan fungsi getColor() untuk mendapatkan warna unik
-        weight: 1
-    };
-}
-
-// Fungsi untuk menghasilkan warna unik berdasarkan string input
-function getColor(str) {
-    // Hitung hash code dari string input
-    var hash = 0;
-    for (var i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    // Ubah hash code menjadi warna hexadecimal
-    var color = '#';
-    for (var j = 0; j < 3; j++) {
-        var value = (hash >> (j * 8)) & 0xFF;
-        if (j === 0) {
-            value = (value + 128) % 256; // R
-        } else if (j === 1) {
-            value = (value + 64) % 256; // G
-        } else {
-            value = (value + 192) % 256; // B
+        // Fungsi untuk mendapatkan gaya untuk polyline
+        function getStyle(feature) {
+            return {
+                color: getColor(feature.properties.PopupInfo), // Menggunakan fungsi getColor() untuk mendapatkan warna unik
+                weight: 1
+            };
         }
-        color += ('00' + value.toString(16)).substr(-2);
-    }
-    return color;
-}
 
-// Inisialisasi variabel untuk menyimpan jalur yang sedang dipilih
-var selectedLayer = null;
+        // Fungsi untuk menghasilkan warna unik berdasarkan string input
+        function getColor(str) {
+            // Hitung hash code dari string input
+            var hash = 0;
+            for (var i = 0; i < str.length; i++) {
+                hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            // Ubah hash code menjadi warna hexadecimal
+            var color = '#';
+            for (var j = 0; j < 3; j++) {
+                var value = (hash >> (j * 8)) & 0xFF;
+                if (j === 0) {
+                    value = (value + 128) % 256; // R
+                } else if (j === 1) {
+                    value = (value + 64) % 256; // G
+                } else {
+                    value = (value + 192) % 256; // B
+                }
+                color += ('00' + value.toString(16)).substr(-2);
+            }
+            return color;
+        }
 
-// Membuat layer GeoJSON dengan gaya dan popup
-var polyline = L.geoJson(null, {
-    style: getStyle,
-    onEachFeature: function(feature, layer) {
+        // Inisialisasi variabel untuk menyimpan jalur yang sedang dipilih
+        var selectedLayer = null;
+
+        // Membuat layer GeoJSON dengan gaya dan popup
+         var polyline = L.geoJson(null, {
+        style: getStyle,
+        onEachFeature: function(feature, layer) {
         // Cek untuk properti yang tidak ada dan berikan nilai default
         var name = feature.properties.Name || "Nama tidak tersedia";
         var popupInfo = feature.properties.PopupInfo || "Informasi tidak tersedia";
-        var image = feature.properties.image ? '{{ asset('storage/images/') }}/' + feature.properties.image : 'default-image-path.jpg';
         var id = feature.properties.id || 0;
 
-        var popupContent = "Nama: " + name + "<br>" +
-            "Informasi: " + popupInfo + "<br>" +
-            "Foto: <img src='" + image +
-            "' class='img-thumbnail' alt='...'>" + "<br>" +
+        var popupContent = "Trayek : " + name + "<br>" +
+            "Rute : " + popupInfo + "<br>" +
             "<div class='d-flex flex-row mt-3'>" +
             "<a href='{{ url('edit-polyline') }}/" + id +
             "' class='btn btn-warning me-2'><i class='fa-solid fa-pen-to-square'></i></a>" +
@@ -422,45 +365,10 @@ fetch('{{ asset('storage/geojson/Jalan_TJ.geojson') }}')
     })
     .catch(error => console.log(error));
 
-
-        /* GeoJSON Polygon */
-        var polygon = L.geoJson(null, {
-            onEachFeature: function(feature, layer) {
-                var popupContent = "Nama: " + feature.properties.name + "<br>" +
-                    "Deskripsi: " + feature.properties.description + "<br>" +
-                    "Foto: <img src='{{ asset('storage/images/') }}/" + feature.properties.image +
-                    "' class='img-thumbnail' alt='...'>" + "<br>" +
-
-                    "<div class='d-flex flex-row mt-2'>" +
-
-                    "<a href='{{ url('edit-polygon') }}/" + feature.properties.id +
-                    "' class='btn btn-warning me-2'><i class='fa-solid fa-pen-to-square'></i></a>" +
-
-                    "<form action='{{ url('delete-polygon') }}/" + feature.properties.id + "' method='POST'>" +
-                    '{{ csrf_field() }}' +
-                    '{{ method_field('DELETE') }}' +
-
-                    "<button type='submit' class='btn btn-danger' onclick='return confirm(`Yakin nih dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
-                    "</form>";
-                layer.on({
-                    click: function(e) {
-                        polygon.bindPopup(popupContent);
-                    },
-                    mouseover: function(e) {
-                        polygon.bindTooltip(feature.properties.name);
-                    },
-                });
-            },
-        });
-        $.getJSON("{{ route('api.polygons') }}", function(data) {
-            polygon.addData(data);
-            map.addLayer(polygon);
-        });
         //layer control
         var overlayMaps = {
-            "Point": point,
-            "Polyline": polyline,
-            "Polygon": polygon
+            "Halte Trans Jogja": point,
+            "Rute Trans Jogja": polyline
         };
 
         var layerControl = L.control.layers(null, overlayMaps, {collapsed: false}).addTo(map);

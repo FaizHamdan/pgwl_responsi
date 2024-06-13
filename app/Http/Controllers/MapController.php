@@ -9,7 +9,7 @@ class MapController extends Controller
     public function index()
     {
         $data = [
-            "title" => "PetaKu",
+            "title" => "SmartMaps Trans Jogja",
         ];
 
         if (auth()->check()) {
@@ -21,7 +21,7 @@ class MapController extends Controller
     public function map()
     {
         $data = [
-            "title" => "PetaKu",
+            "title" => "SmartMaps Trans Jogja",
         ];
 
         if (auth()->check()) {

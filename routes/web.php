@@ -24,6 +24,10 @@ Route::get('/landing', [MapController::class, 'landing'])->name('landing');
 Route::get('/map', [MapController::class, 'map'])->name('index-public');
 Route::get('/table', [MapController::class, 'table'])->name('table');
 
+Route::get('/rute', [RuteController::class, 'index']);
+
+Route::post('api/polyline-count', [DashboardController::class, 'updatePolylineCount']);
+
 // Create Point
 Route::post('/store-point',[PointController::class, 'store'])->name('point-store');
 
