@@ -19,13 +19,13 @@
 
 >Screenshot Website
 ### Home Page
->![Homepage](public\storage\images\Data.png)
+>![Homepage](Data.png)
 ### Map Public
->![Public](public\storage\images\Public.png)
+>![Public](Public.png)
 ### Map Login
->![Map](public\storage\images\Map.png)
+>![Map](Map.png)
 ### Data
->![Data](public\storage\images\Data.png)
+>![Data](Data.png)
 
 >Dikembangkan oleh [Faiz Hamdan Zulfa](https://github.com/FaizHamdan/pgwl_responsi.git)
 
