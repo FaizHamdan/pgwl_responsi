@@ -21,7 +21,7 @@
                     <tr>
                         <td>{{ $no++ }}</td>
                         <td>{{ $p->name }}</td>
-                        <td>{{ $p->description }}</td>
+                        <td>{{ $p->popupinfo}}</td>
                     </tr>
                     @endforeach
                 </tbody>

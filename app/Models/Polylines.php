@@ -10,17 +10,17 @@ class Polylines extends Model
 {
     use HasFactory;
 
-    protected $table = 'table_polylines';
+    protected $table = 'RUTE';
 
     protected $guarded = ['id'];
 
     public function polylines()
     {
-        return $this->select(DB::raw('id, name, description, image, ST_AsGeoJSON(geom) as geom, created_at, updated_at'))->get();
+        return $this->select(DB::raw('id, name, popupinfo, ST_AsGeoJSON(geom) as geom'))->get();
     }
 
     public function polyline($id)
     {
-        return $this->select(DB::raw('id, name, description, image, ST_AsGeoJSON(geom) as geom, created_at, updated_at'))->where('id', $id)->get();
+        return $this->select(DB::raw('id, name, popupinfo, ST_AsGeoJSON(geom) as geom'))->where('id', $id)->get();
     }
 }
